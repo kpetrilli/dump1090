@@ -340,6 +340,20 @@ function initialize() {
 		toggleAllPlanes(true);
         })
 
+        // Event handlers for to column checkboxes
+        var checkboxes = ['#icao_col_checkbox' , '#flag_col_checkbox','#ident_col_checkbox',
+        '#reg_col_checkbox', '#ac_col_checkbox', '#squawk_col_checkbox', '#alt_col_checkbox',
+        '#speed_col_checkbox', '#vrate_col_checkbox', '#distance_col_checkbox',
+        '#heading_col_checkbox', '#messages_col_checkbox', '#msg_age_col_checkbox',
+        '#rssi_col_checkbox', '#lat_col_checkbox', '#lon_col_checkbox', '#datasource_col_checkbox']
+
+        checkboxes.forEach(function (element){
+                $(element).on('click', function() {
+                        console.log(element)
+                        toggleColumn(element, true);
+                });
+        });
+
         // Force map to redraw if sidebar container is resized - use a timer to debounce
         var mapResizeTimeout;
         $("#sidebar_container").on("resize", function() {
@@ -352,6 +366,10 @@ function initialize() {
         toggleAltitudeChart(false);
         toggleAllPlanes(false);
         toggleGroupByDataType(false);
+
+        for (var i = 0; i < checkboxes.length; i++) {
+                toggleColumn(checkboxes[i], false);
+        }
 
         // Get receiver metadata, reconfigure using it, then continue
         // with initialization
@@ -1998,4 +2016,27 @@ function onSetRangeRings() {
 	setRangeRings();
 
 	createSiteCircleFeatures();
+}
+
+function toggleColumn(div, toggled) {
+	if (typeof localStorage[div] === 'undefined') {
+		localStorage.setItem(div, 'deselected');
+	}
+
+        var status = localStorage.getItem(div);
+        var infoTable = $("#tableinfo");
+
+	if (toggled === true) {
+	status = (status === 'deselected') ? 'selected' : 'deselected';
+        }
+
+        if (status === 'selected') {
+                $(div).addClass('settingsCheckboxChecked');
+                showColumn(infoTable, '#registration', true);
+	} else {
+                $(div).removeClass('settingsCheckboxChecked');
+                showColumn(infoTable, '#registration', false);
+	}
+
+	localStorage.setItem(div, status);
 }
