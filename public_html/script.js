@@ -302,6 +302,14 @@ function initialize() {
         	$('#settings_infoblock').toggle();
         });
 
+        $('#column_select').on('click', function() {
+                $('#column_select_window').toggle();
+        });
+
+        $('#column_select_close_box').on('click', function() {
+                $('#column_select_window').hide();
+        });
+
         $('#settings_close').on('click', function() {
             $('#settings_infoblock').hide();
         });
