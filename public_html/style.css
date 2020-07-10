@@ -88,7 +88,13 @@ html, body {
     position: relative;
     display: table;
     padding-top: 5px;
-    left: 5px;
+    left: 20px;
+}
+
+.columnOptionSelectAllContainer {
+    position: relative;
+    display: table;
+    padding-top: 5px;
 }
 
 .columnOptionText {
@@ -691,7 +697,7 @@ select.error, textarea.error, input.error {
     padding-bottom: 10px;
 }
 
-.settingsCheckbox, .columnSelectCheckbox  {
+.settingsCheckbox, .columnSelectCheckbox, .columnSelectAllCheckbox {
     width: 20px;
     height: 11px;
     background-image: url('images/box-empty.png');

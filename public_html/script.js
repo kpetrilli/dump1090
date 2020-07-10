@@ -364,6 +364,10 @@ function initialize() {
 		toggleAllPlanes(true);
         })
 
+        $('#select_all_column_checkbox').on('click', function() {
+                toggleAllColumns(true);
+        })
+
         // Event handlers for to column checkboxes
         checkbox_div_map.forEach(function (checkbox, div) {
                 $(div).on('click', function() {
@@ -383,6 +387,7 @@ function initialize() {
         toggleAltitudeChart(false);
         toggleAllPlanes(false);
         toggleGroupByDataType(false);
+        toggleAllColumns(false);
 
         // Get receiver metadata, reconfigure using it, then continue
         // with initialization
@@ -2076,7 +2081,50 @@ function toggleColumn(div, checkbox, toggled) {
 	} else {
                 $(checkbox).removeClass('settingsCheckboxChecked');
                 showColumn(infoTable, div, false);
+                $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
+                localStorage.setItem('selectAllColumnsCheckbox', 'deselected');
 	}
 
 	localStorage.setItem(checkbox, status);
+}
+
+function toggleAllColumns(switchToggle) {
+	if (typeof localStorage['selectAllColumnsCheckbox'] === 'undefined') {
+		localStorage.setItem('selectAllColumnsCheckbox','deselected');
+	}
+
+        var infoTable = $("#tableinfo");
+
+        var selectAllColumnsCheckbox = localStorage.getItem('selectAllColumnsCheckbox');
+        console.log('selectAllColumnsCheckbox: ' + selectAllColumnsCheckbox)
+        if (switchToggle === true) {
+                selectAllColumnsCheckbox = (selectAllColumnsCheckbox === 'deselected') ? 'selected' : 'deselected';
+
+                if (selectAllColumnsCheckbox === 'deselected') {
+                        console.log('deselecting all columns');
+                        $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
+                        checkbox_div_map.forEach(function (div, checkbox) {
+                                $(checkbox).removeClass('settingsCheckboxChecked');
+                                showColumn(infoTable, div, false);
+                                localStorage.setItem(checkbox, 'deselected');
+                        });
+                } else {
+                        console.log('selecting all columns');
+                        $('#select_all_column_checkbox').addClass('settingsCheckboxChecked');
+                        // Now check local storage checkbox status
+                        checkbox_div_map.forEach(function (div, checkbox) {
+                                $(checkbox).addClass('settingsCheckboxChecked');
+                                showColumn(infoTable, div, true);
+                                localStorage.setItem(checkbox, 'selected');
+                        });
+                }
+        }
+
+        if (selectAllColumnsCheckbox === 'deselected') {
+                $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
+        } else {
+                $('#select_all_column_checkbox').addClass('settingsCheckboxChecked');
+        }
+
+        localStorage.setItem('selectAllColumnsCheckbox', selectAllColumnsCheckbox);
 }
