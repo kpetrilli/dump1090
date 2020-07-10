@@ -53,6 +53,26 @@ var layers;
 // piaware vs flightfeeder
 var isFlightFeeder = false;
 
+var checkbox_div_map = new Map ([
+        ['#icao_col_checkbox', '#icao'],
+        ['#flag_col_checkbox', '#flag'],
+        ['#ident_col_checkbox', '#flight'],
+        ['#reg_col_checkbox', '#registration'],
+        ['#ac_col_checkbox', '#aircraft_type'],
+        ['#squawk_col_checkbox', '#squawk'],
+        ['#alt_col_checkbox', '#altitude'],
+        ['#speed_col_checkbox', '#speed'],
+        ['#vrate_col_checkbox', '#vert_rate'],
+        ['#distance_col_checkbox', '#distance'],
+        ['#heading_col_checkbox', '#track'],
+        ['#messages_col_checkbox', '#msgs'],
+        ['#msg_age_col_checkbox', '#seen'],
+        ['#rssi_col_checkbox', '#rssi'],
+        ['#lat_col_checkbox', '#lat'],
+        ['#lon_col_checkbox', '#lon'],
+        ['#datasource_col_checkbox', '#data_source']
+]);
+
 function processReceiverUpdate(data) {
 	// Loop through all the planes in the data packet
         var now = data.now;
@@ -341,16 +361,9 @@ function initialize() {
         })
 
         // Event handlers for to column checkboxes
-        var checkboxes = ['#icao_col_checkbox' , '#flag_col_checkbox','#ident_col_checkbox',
-        '#reg_col_checkbox', '#ac_col_checkbox', '#squawk_col_checkbox', '#alt_col_checkbox',
-        '#speed_col_checkbox', '#vrate_col_checkbox', '#distance_col_checkbox',
-        '#heading_col_checkbox', '#messages_col_checkbox', '#msg_age_col_checkbox',
-        '#rssi_col_checkbox', '#lat_col_checkbox', '#lon_col_checkbox', '#datasource_col_checkbox']
-
-        checkboxes.forEach(function (element){
-                $(element).on('click', function() {
-                        console.log(element)
-                        toggleColumn(element, true);
+        checkbox_div_map.forEach(function (_, div) {
+                $(div).on('click', function() {
+                        toggleColumn(div, true);
                 });
         });
 
@@ -367,9 +380,9 @@ function initialize() {
         toggleAllPlanes(false);
         toggleGroupByDataType(false);
 
-        for (var i = 0; i < checkboxes.length; i++) {
-                toggleColumn(checkboxes[i], false);
-        }
+        checkbox_div_map.forEach(function (_, div) {
+                toggleColumn(div, false);
+        });
 
         // Get receiver metadata, reconfigure using it, then continue
         // with initialization
@@ -2019,7 +2032,7 @@ function onSetRangeRings() {
 }
 
 function toggleColumn(div, toggled) {
-	if (typeof localStorage[div] === 'undefined') {
+        if (typeof localStorage[div] === 'undefined') {
 		localStorage.setItem(div, 'deselected');
 	}
 
@@ -2027,15 +2040,16 @@ function toggleColumn(div, toggled) {
         var infoTable = $("#tableinfo");
 
 	if (toggled === true) {
-	status = (status === 'deselected') ? 'selected' : 'deselected';
+	        status = (status === 'deselected') ? 'selected' : 'deselected';
         }
 
+        // Toggle checkbox and column visibility
         if (status === 'selected') {
                 $(div).addClass('settingsCheckboxChecked');
-                showColumn(infoTable, '#registration', true);
+                showColumn(infoTable, checkbox_div_map.get(div), true);
 	} else {
                 $(div).removeClass('settingsCheckboxChecked');
-                showColumn(infoTable, '#registration', false);
+                showColumn(infoTable, checkbox_div_map.get(div), false);
 	}
 
 	localStorage.setItem(div, status);
