@@ -70,7 +70,11 @@ var checkbox_div_map = new Map ([
         ['#rssi_col_checkbox', '#rssi'],
         ['#lat_col_checkbox', '#lat'],
         ['#lon_col_checkbox', '#lon'],
-        ['#datasource_col_checkbox', '#data_source']
+        ['#datasource_col_checkbox', '#data_source'],
+        ['#airframes_col_checkbox', '#airframes_mode_s_link'],
+        ['#fa_modes_link_checkbox', '#flightaware_mode_s_link'],
+        ['#fa_photo_link_checkbox', '#flightaware_photo_link'],
+
 ]);
 
 function processReceiverUpdate(data) {
@@ -361,9 +365,9 @@ function initialize() {
         })
 
         // Event handlers for to column checkboxes
-        checkbox_div_map.forEach(function (_, div) {
+        checkbox_div_map.forEach(function (checkbox, div) {
                 $(div).on('click', function() {
-                        toggleColumn(div, true);
+                        toggleColumn(checkbox, div, true);
                 });
         });
 
@@ -379,10 +383,6 @@ function initialize() {
         toggleAltitudeChart(false);
         toggleAllPlanes(false);
         toggleGroupByDataType(false);
-
-        checkbox_div_map.forEach(function (_, div) {
-                toggleColumn(div, false);
-        });
 
         // Get receiver metadata, reconfigure using it, then continue
         // with initialization
@@ -1665,16 +1665,42 @@ function setColumnVisibility() {
     var mapIsVisible = $("#map_container").is(":visible");
     var infoTable = $("#tableinfo");
 
-    showColumn(infoTable, "#registration", !mapIsVisible);
-    showColumn(infoTable, "#aircraft_type", !mapIsVisible);   
-    showColumn(infoTable, "#vert_rate", !mapIsVisible);
-    showColumn(infoTable, "#rssi", !mapIsVisible);
-    showColumn(infoTable, "#lat", !mapIsVisible);
-    showColumn(infoTable, "#lon", !mapIsVisible);
-    showColumn(infoTable, "#data_source", !mapIsVisible);
-    showColumn(infoTable, "#airframes_mode_s_link", !mapIsVisible);
-    showColumn(infoTable, "#flightaware_mode_s_link", !mapIsVisible);
-    showColumn(infoTable, "#flightaware_photo_link", !mapIsVisible);
+    var defaultCheckBoxes = [
+        '#icao_col_checkbox',
+        '#flag_col_checkbox',
+        '#ident_col_checkbox',
+        '#squawk_col_checkbox',
+        '#alt_col_checkbox',
+        '#speed_col_checkbox',
+        '#distance_col_checkbox',
+        '#heading_col_checkbox',
+        '#messages_col_checkbox',
+        '#msg_age_col_checkbox'
+    ]
+
+    // Show default columns if checkboxes have not been set
+    for (var i=0; i < defaultCheckBoxes.length; i++) {
+        var checkBoxdiv = defaultCheckBoxes[i];
+        var columnDiv = checkbox_div_map.get(checkBoxdiv)
+
+        if (typeof localStorage[checkBoxdiv] === 'undefined') {
+                $(checkBoxdiv).addClass('settingsCheckboxChecked');
+                localStorage.setItem(checkBoxdiv, 'selected');
+                showColumn(infoTable, columnDiv, true);
+        }
+    }
+
+    // Now check local storage checkbox status
+    checkbox_div_map.forEach(function (div, checkbox) {
+        var status = localStorage.getItem(checkbox);
+        if (status === 'selected') {
+                $(checkbox).addClass('settingsCheckboxChecked');
+                showColumn(infoTable, div, true);
+        } else {
+                $(checkbox).removeClass('settingsCheckboxChecked');
+                showColumn(infoTable, div, false);
+        }
+    });
 }
 
 function setSelectedInfoBlockVisibility() {
@@ -2031,12 +2057,12 @@ function onSetRangeRings() {
 	createSiteCircleFeatures();
 }
 
-function toggleColumn(div, toggled) {
-        if (typeof localStorage[div] === 'undefined') {
-		localStorage.setItem(div, 'deselected');
+function toggleColumn(div, checkbox, toggled) {
+        if (typeof localStorage[checkbox] === 'undefined') {
+		localStorage.setItem(checkbox, 'deselected');
 	}
 
-        var status = localStorage.getItem(div);
+        var status = localStorage.getItem(checkbox);
         var infoTable = $("#tableinfo");
 
 	if (toggled === true) {
@@ -2045,12 +2071,12 @@ function toggleColumn(div, toggled) {
 
         // Toggle checkbox and column visibility
         if (status === 'selected') {
-                $(div).addClass('settingsCheckboxChecked');
-                showColumn(infoTable, checkbox_div_map.get(div), true);
+                $(checkbox).addClass('settingsCheckboxChecked');
+                showColumn(infoTable, div, true);
 	} else {
-                $(div).removeClass('settingsCheckboxChecked');
-                showColumn(infoTable, checkbox_div_map.get(div), false);
+                $(checkbox).removeClass('settingsCheckboxChecked');
+                showColumn(infoTable, div, false);
 	}
 
-	localStorage.setItem(div, status);
+	localStorage.setItem(checkbox, status);
 }
