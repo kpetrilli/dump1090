@@ -45,6 +45,12 @@ html, body {
     height: 100%;
 }
 
+#planes_table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 #column_select {
     position: relative;
     float: right;
