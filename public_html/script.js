@@ -2096,29 +2096,23 @@ function toggleAllColumns(switchToggle) {
         var infoTable = $("#tableinfo");
 
         var selectAllColumnsCheckbox = localStorage.getItem('selectAllColumnsCheckbox');
-        console.log('selectAllColumnsCheckbox: ' + selectAllColumnsCheckbox)
+
         if (switchToggle === true) {
                 selectAllColumnsCheckbox = (selectAllColumnsCheckbox === 'deselected') ? 'selected' : 'deselected';
 
-                if (selectAllColumnsCheckbox === 'deselected') {
-                        console.log('deselecting all columns');
-                        $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
-                        checkbox_div_map.forEach(function (div, checkbox) {
+                checkbox_div_map.forEach(function (div, checkbox) {
+                        if (selectAllColumnsCheckbox === 'deselected') {
+                                $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
                                 $(checkbox).removeClass('settingsCheckboxChecked');
                                 showColumn(infoTable, div, false);
-                                localStorage.setItem(checkbox, 'deselected');
-                        });
-                } else {
-                        console.log('selecting all columns');
-                        $('#select_all_column_checkbox').addClass('settingsCheckboxChecked');
-                        // Now check local storage checkbox status
-                        checkbox_div_map.forEach(function (div, checkbox) {
+                        } else {
+                                $('#select_all_column_checkbox').addClass('settingsCheckboxChecked');
                                 $(checkbox).addClass('settingsCheckboxChecked');
                                 showColumn(infoTable, div, true);
-                                localStorage.setItem(checkbox, 'selected');
-                        });
-                }
-        }
+                        }
+                        localStorage.setItem(checkbox, selectAllColumnsCheckbox);
+                });
+        };
 
         if (selectAllColumnsCheckbox === 'deselected') {
                 $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
