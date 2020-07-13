@@ -54,6 +54,8 @@ html, body {
 #column_select {
     position: relative;
     float: right;
+    background-color: #002F5D;
+    color: #FFFFFF;
 }
 
 #column_select_window {
