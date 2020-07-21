@@ -2063,35 +2063,35 @@ function onSetRangeRings() {
 }
 
 function toggleColumn(div, checkbox, toggled) {
-        if (typeof localStorage[checkbox] === 'undefined') {
+	if (typeof localStorage[checkbox] === 'undefined') {
 		localStorage.setItem(checkbox, 'deselected');
 	}
 
-        var status = localStorage.getItem(checkbox);
-        var infoTable = $("#tableinfo");
+	var status = localStorage.getItem(checkbox);
+	var infoTable = $("#tableinfo");
 
 	if (toggled === true) {
-	        status = (status === 'deselected') ? 'selected' : 'deselected';
-        }
+		status = (status === 'deselected') ? 'selected' : 'deselected';
+	}
 
-        // Toggle checkbox and column visibility
-        if (status === 'selected') {
-                $(checkbox).addClass('settingsCheckboxChecked');
-                showColumn(infoTable, div, true);
+	// Toggle checkbox and column visibility
+	if (status === 'selected') {
+		$(checkbox).addClass('settingsCheckboxChecked');
+		showColumn(infoTable, div, true);
 	} else {
-                $(checkbox).removeClass('settingsCheckboxChecked');
-                showColumn(infoTable, div, false);
-                $('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
-                localStorage.setItem('selectAllColumnsCheckbox', 'deselected');
+		$(checkbox).removeClass('settingsCheckboxChecked');
+		showColumn(infoTable, div, false);
+		$('#select_all_column_checkbox').removeClass('settingsCheckboxChecked');
+		localStorage.setItem('selectAllColumnsCheckbox', 'deselected');
 	}
 
 	localStorage.setItem(checkbox, status);
 }
 
 function toggleAllColumns(switchToggle) {
-	if (typeof localStorage['selectAllColumnsCheckbox'] === 'undefined') {
-		localStorage.setItem('selectAllColumnsCheckbox','deselected');
-	}
+        if (typeof localStorage['selectAllColumnsCheckbox'] === 'undefined') {
+                ocalStorage.setItem('selectAllColumnsCheckbox','deselected');
+        }
 
         var infoTable = $("#tableinfo");
 
