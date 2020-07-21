@@ -45,10 +45,14 @@ html, body {
     height: 100%;
 }
 
-#planes_table {
+#planes_table_container {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+#planes_table {
+    overflow-x: scroll;
 }
 
 #column_select {
