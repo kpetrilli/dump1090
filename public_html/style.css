@@ -4,6 +4,7 @@
 
 	/* Primary color */
 	--primary-color: #002F5D;
+	--secondary-color: rgba(0,160,226,1);
 
 	/* Text colors */
 	--text-color-primary: #000000;
@@ -544,7 +545,7 @@ input.error {
 
 .button {
 	background: #00A0E2;
-	background: rgba(0, 160, 226, 1);
+	background: var(--secondary-color);
 	min-width: 80px;
 	height: 28px;
 	border-radius: 4px;
