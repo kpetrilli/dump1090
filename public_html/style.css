@@ -52,6 +52,7 @@ body {
 	width: 500px;
 	left: 0 !important;
 	height: 100%;
+	border-left: 1px solid var(--primary-color);
 }
 
 #map_container {
