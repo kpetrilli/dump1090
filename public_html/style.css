@@ -1,9 +1,12 @@
 :root {
 	/* Main background color */
 	--background-color: #FFFFFF;
-	
+
 	/* Primary color */
 	--primary-color: #002F5D;
+
+	/* Text color */
+	--text-color: #000000;
 }
 
 html,
@@ -424,7 +427,7 @@ input.error {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	line-height: 16px;
-	color: #000000;
+	color: var(--text-color)000;
 }
 
 .sectionTitle {
@@ -443,7 +446,7 @@ input.error {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	width: 100%;
 	font-size: 12px;
-	color: #000000;
+	color: var(--text-color)000;
 	color: rgb(0, 0, 0);
 	display: inline-flex;
 	justify-content: flex-end;
@@ -790,6 +793,10 @@ input.error {
 
 .ol-control button {
 	outline: none;
+}
+
+.ol-attribution:not(.ol-collapsed) {
+	background: var(--background-color);
 }
 
 .bottom-container {
