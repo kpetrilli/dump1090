@@ -687,7 +687,7 @@ input.error {
 .legendBox {
 	width: 15px;
 	height: 15px;
-	border: 1px solid #efefef;
+	border: 1px solid var(--border-color);
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
