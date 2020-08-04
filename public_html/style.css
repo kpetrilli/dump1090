@@ -196,8 +196,6 @@ body {
 	left: 10px !important;
 }
 
-
-
 div#SpecialSquawkWarning { 
 	position: absolute;
 	bottom: 25px; right: 430px;
@@ -263,6 +261,10 @@ div#loader {
 #altitude_filter_form {
 	font-size: small;
 	margin: 10px 0 10px 0;
+}
+
+#altitude_filter_form button {
+	color: var(--text-color)
 }
 
 .aircraft_table_header { 
