@@ -266,10 +266,6 @@ div#loader {
 	margin: 10px 0 10px 0;
 }
 
-#altitude_filter_form button {
-	color: var(--text-color)
-}
-
 .aircraft_table_header { 
 	background-color: var(--primary-color);
 	color: var(--text-color-secondary);
