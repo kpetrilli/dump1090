@@ -365,6 +365,8 @@ div#loader {
 	width: 50px;
 	background-color: var(--background-color);
 	border-color: var(--border-color);
+	border-style: solid;
+	border-width: 1px;
 }
 
 .rangeRingsInput {
