@@ -8,6 +8,9 @@
 	/* Text colors */
 	--text-color-primary: #000000;
 	--text-color-secondary: #FFFFFF;
+
+	/* Various */
+	--border-color: #000000;
 }
 
 html,
@@ -361,6 +364,7 @@ div#loader {
 .altitudeFilterInput {
 	width: 50px;
 	background-color: var(--background-color);
+	border-color: var(--border-color);
 }
 
 .rangeRingsInput {
