@@ -360,6 +360,7 @@ div#loader {
 
 .altitudeFilterInput {
 	width: 50px;
+	background-color: var(--background-color);
 }
 
 .rangeRingsInput {
