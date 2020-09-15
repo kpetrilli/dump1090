@@ -12,6 +12,7 @@
 
 	/* Various */
 	--border-color: #7F7F7F;
+	--checkbox-color-checked: #00a0e2;
 }
 
 html,
@@ -752,7 +753,10 @@ input.error {
 }
 
 .settingsCheckboxChecked {
-	background-image: url('images/box-checked.png') !important;
+	background-color: var(--checkbox-color-checked);
+	width: 11px;
+	height: 11px;
+	border-radius: 2px;
 }
 
 .settingsCloseBox {
