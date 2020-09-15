@@ -368,6 +368,7 @@ div#loader {
 	border-color: var(--border-color);
 	border-style: solid;
 	border-width: 1px;
+	color: var(--text-color-secondary);
 }
 
 .rangeRingsInput {
@@ -379,6 +380,7 @@ div#loader {
 	width: 170px;
 	padding-top: 8px;
 	text-indent: 10px;
+	color: var(--text-color-primary);
 }
 
 .set_range_rings_button {
@@ -474,7 +476,7 @@ input.error {
 	font-size: 14px;
 	line-height: 20px;
 	text-indent: 16px;
-	color: rgb(0, 0, 0);
+	color: var(--text-color-primary);
 }
 
 .link {
