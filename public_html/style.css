@@ -374,7 +374,7 @@ div#loader {
 }
 
 .rangeRingsInput {
-	width: 30px;
+	width: 50px;
 	float: right;
 	background-color: var(--background-color);
 	color: var(--text-color-secondary);
