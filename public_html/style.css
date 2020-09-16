@@ -747,9 +747,11 @@ input.error {
 }
 
 .settingsCheckbox {
-	width: 20px;
+	width: 11px;
 	height: 11px;
-	background-image: url('images/box-empty.png');
+	border-radius: 2px;
+	border: 1px solid var(--border-color);
+	background-color: var(--background-color);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
