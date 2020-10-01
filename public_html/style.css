@@ -865,12 +865,6 @@ input.error {
 	.settingsCloseBox {
 		background-image: url('images/close-settings@2x.png');
 	}
-	.settingsCheckboxChecked {
-		background-image: url('images/box-checked@2x.png') !important;
-	}
-	.settingsCheckbox {
-		background-image: url('images/box-empty@2x.png');
-	}
 	.ol-zoom-out {
 		background-image: url("images/zoom-out@2x.png");
 	}
@@ -894,12 +888,6 @@ input.error {
 (min-resolution: 192dpi) { 
 	.settingsCloseBox {
 		background-image: url('images/close-settings@3x.png');
-	}
-	.settingsCheckboxChecked {
-		background-image: url('images/box-checked@3x.png') !important;
-	}
-	.settingsCheckbox {
-		background-image: url('images/box-empty@3x.png');
 	}
 	.ol-zoom-out {
 		background-image: url("images/zoom-out@3x.png");
